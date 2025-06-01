@@ -6,13 +6,13 @@ void setup() {
     {
         using namespace LayoutEngine;
 
-        LayoutEngine::traverseElementTree(
+        GrowChildren(
             new Element("root", {
-                .size = { .height = 420, .width = 300 },
-                .style = { .padding = 10, .childGap = 5 },
+                .size = { .height = 420, .width = 100 },
+                .style = { .padding = 10, .childGap = 10 },
             },
             {
-                new Element("block1", {}, {
+                new Element("block1", {
                     new Element("block3"),
                     new Element("block4")
                 }),

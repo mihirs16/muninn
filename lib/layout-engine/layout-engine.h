@@ -29,7 +29,7 @@ namespace LayoutEngine {
         int childGap;
 
         /** 
-         * Number of pixels occupied by the border  
+         * Number of pixels occupied by the border inside the element
          * (inset border thickness) 
          */
         int borderWidth;
@@ -57,11 +57,19 @@ namespace LayoutEngine {
             ElementProps props;
             
             /** Children of this element */
-            std::vector<Element*> children;
+           std::vector<Element*> children;
 
         public:
             /** Define a generic element representing an area on the display */
-            Element(std::string id, ElementProps props = {}, std::vector<Element*> children = {});
+            Element(
+                std::string id, 
+                ElementProps props, 
+                std::vector<Element*> children = {}
+            );
+            Element(
+                std::string id,
+                std::vector<Element*> children = {}
+            );
 
             /** Returns an iterator (vector) for children */
             std::vector<Element*> getChildren();
@@ -69,11 +77,19 @@ namespace LayoutEngine {
             /** Returns the unique identifier for this element */
             std::string getId();
 
-            /** Append a new child Element to this Element */
-            void addChildElement(Element* element);
+            /** Returns the styling properties of the element */
+            ElementProps getProps();
+
+            /** Updates the size of the child */
+            void updateSize(Size size) {
+                this->props.size = size;
+            }
+
     };
 
-    void traverseElementTree(Element* element);
+    void GrowChildren(Element* element);
+
+    // void PositionElements(Element* element);
 }
 
 #endif // LAYOUT_ENGINE_ROOT_H
