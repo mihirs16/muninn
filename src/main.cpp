@@ -1,11 +1,21 @@
 #include <Arduino.h>
-#include <canvas.h>
-#include <gauge.h>
+#include <layout-engine.h>
 
 void setup() {
-    Canvas::Canvas canvas = Canvas::Canvas(400, 300, 3, Canvas::BackgroundColor::white);
-    Canvas::Gauge gauge1 = Canvas::Gauge(&canvas, 135, 135, 5);
-    gauge1.drawGauge(0, 0);
+    Serial.begin(115200);
+    LayoutEngine::Element *root = new LayoutEngine::Element("root", {
+        .size = { .height = 420, .width = 300 },
+        .style = { .padding = 10, .childGap = 5 },
+    },
+    {
+        new LayoutEngine::Element("block1", {}, {
+            new LayoutEngine::Element("block3"),
+            new LayoutEngine::Element("block4")
+        }),
+        new LayoutEngine::Element("block2")
+    });
+
+    LayoutEngine::traverseElementTree(root);
 }
 
 void loop()
