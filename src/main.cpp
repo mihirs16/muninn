@@ -3,19 +3,23 @@
 
 void setup() {
     Serial.begin(115200);
-    LayoutEngine::Element *root = new LayoutEngine::Element("root", {
-        .size = { .height = 420, .width = 300 },
-        .style = { .padding = 10, .childGap = 5 },
-    },
     {
-        new LayoutEngine::Element("block1", {}, {
-            new LayoutEngine::Element("block3"),
-            new LayoutEngine::Element("block4")
-        }),
-        new LayoutEngine::Element("block2")
-    });
+        using namespace LayoutEngine;
 
-    LayoutEngine::traverseElementTree(root);
+        LayoutEngine::traverseElementTree(
+            new Element("root", {
+                .size = { .height = 420, .width = 300 },
+                .style = { .padding = 10, .childGap = 5 },
+            },
+            {
+                new Element("block1", {}, {
+                    new Element("block3"),
+                    new Element("block4")
+                }),
+                new Element("block2")
+            })
+        );
+    }
 }
 
 void loop()
