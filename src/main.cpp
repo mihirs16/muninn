@@ -8,15 +8,24 @@ void setup() {
 
         GrowChildren(
             new Element("root", {
+                .axis = "vertical",
                 .size = { .height = 420, .width = 100 },
-                .style = { .padding = 10, .childGap = 10 },
             },
             {
                 new Element("block1", {
+                    .axis = "horizontal"
+                },
+                {
                     new Element("block3"),
                     new Element("block4")
                 }),
-                new Element("block2")
+                new Element("block2", {
+                    .axis = "horizontal"
+                },
+                {
+                    new Element("block5"),
+                    new Element("block6")
+                })
             })
         );
     }

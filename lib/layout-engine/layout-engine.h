@@ -37,6 +37,9 @@ namespace LayoutEngine {
 
     /** Options for an element which can be provided at initialization */
     struct ElementProps {
+        /** Axis of layout can be `horizontal` | `vertical` */
+        std::string axis;
+
         /** Position of the element in `px` */
         Position position;
 
@@ -57,7 +60,7 @@ namespace LayoutEngine {
             ElementProps props;
             
             /** Children of this element */
-           std::vector<Element*> children;
+            std::vector<Element*> children;
 
         public:
             /** Define a generic element representing an area on the display */
@@ -81,9 +84,7 @@ namespace LayoutEngine {
             ElementProps getProps();
 
             /** Updates the size of the child */
-            void updateSize(Size size) {
-                this->props.size = size;
-            }
+            void updateSize(Size size);
 
     };
 
