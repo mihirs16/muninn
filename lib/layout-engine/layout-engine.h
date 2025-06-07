@@ -6,10 +6,16 @@
 
 namespace LayoutEngine {
     struct Position {
-        /** Pixel position on the horizontal axis (left-to-right)*/
+        /**
+         * Pixel position of the top-left corner 
+         * on the horizontal axis (left-to-right)
+         */
         int x;
 
-        /** Pixel position on the vertical axis (top-to-bottom) */
+        /**
+         * Pixel position of the top-left corner
+         * on the vertical axis (top-to-bottom)
+         */
         int y;
     };
 
@@ -28,7 +34,7 @@ namespace LayoutEngine {
         /** Number of pixels between each child of this Element */
         int childGap;
 
-        /** 
+        /**
          * Number of pixels occupied by the border inside the element
          * (inset border thickness) 
          */
@@ -77,20 +83,25 @@ namespace LayoutEngine {
             /** Returns an iterator (vector) for children */
             std::vector<Element*> getChildren();
 
-            /** Returns the unique identifier for this element */
+            /** Returns the unique identifier for this Element */
             std::string getId();
 
-            /** Returns the styling properties of the element */
+            /** Returns the styling properties of the Element */
             ElementProps getProps();
 
-            /** Updates the size of the child */
+            /** Updates the size of the Element */
             void updateSize(Size size);
+
+            /** Updates the position of the Element */
+            void updatePosition(Position position);
 
     };
 
     void GrowChildren(Element* element);
 
-    // void PositionElements(Element* element);
+    void PositionElements(Element* element);
+
+    void BuildLayout(Element* element);
 }
 
 #endif // LAYOUT_ENGINE_ROOT_H

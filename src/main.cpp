@@ -6,25 +6,34 @@ void setup() {
     {
         using namespace LayoutEngine;
 
-        GrowChildren(
+        BuildLayout(
             new Element("root", {
                 .axis = "vertical",
                 .size = { .height = 420, .width = 100 },
+                .style = { .borderWidth = 1 }
             },
             {
                 new Element("block1", {
-                    .axis = "horizontal"
+                    .style = {
+                        .padding = 1,
+                        .childGap = 1,
+                        .borderWidth = 1
+                    }
                 },
                 {
-                    new Element("block3"),
-                    new Element("block4")
+                    new Element("block3", { .style = { .borderWidth = 1 } }, {}),
+                    new Element("block4", { .style = { .borderWidth = 1 } }, {})
                 }),
                 new Element("block2", {
-                    .axis = "horizontal"
+                    .style = {
+                        .padding = 1,
+                        .childGap = 1,
+                        .borderWidth = 1
+                    }
                 },
                 {
-                    new Element("block5"),
-                    new Element("block6")
+                    new Element("block5", { .style = { .borderWidth = 1 } }, {}),
+                    new Element("block6", { .style = { .borderWidth = 1 } }, {})
                 })
             })
         );
