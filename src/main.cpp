@@ -22,7 +22,8 @@ void setup() {
                 },
                 {
                     new Element("block3", { .style = { .borderWidth = 1 } }, {}),
-                    new Element("block4", { .style = { .borderWidth = 1 } }, {})
+                    new Element("block4", { .style = { .borderWidth = 1 } }, {}),
+                    new Element("block5", { .style = { .borderWidth = 1 } }, {})
                 }),
                 new Element("block2", {
                     .style = {

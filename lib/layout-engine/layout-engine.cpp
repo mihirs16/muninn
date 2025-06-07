@@ -132,17 +132,18 @@ void LayoutEngine::PositionElements(Element *root) {
     std::vector<Element*> children = root->getChildren();
     int numChildren = children.size();
 
+    int offsetAlongAxis = props.position.x + props.style.borderWidth + props.style.padding;
+    int offsetAcrossAxis =  props.position.y + props.style.borderWidth + props.style.padding;
     for (int i = 0; i < numChildren; i++) {
-        int childX = props.position.x + props.style.borderWidth + props.style.padding;
-        int childY = props.position.y + props.style.borderWidth + props.style.padding;
         Element* child = children[i];
+        ElementProps childProps = child->getProps();
 
         // first child is positioned relative to this element (left-to-right)
         // first child is at the top-left corner and thus axis agnostic
         if (i == 0) {
             child->updatePosition({
-                .x = childX,
-                .y = childY
+                .x = offsetAlongAxis,
+                .y = offsetAcrossAxis
             });
             continue;
         }
@@ -151,15 +152,19 @@ void LayoutEngine::PositionElements(Element *root) {
         ElementProps prevProps = prevChild->getProps();
 
         if (props.axis == "horizontal") {
-            childX += prevProps.size.width + (i * props.style.childGap);
+            offsetAlongAxis += prevProps.size.width + props.style.childGap;
+            child->updatePosition({
+                .x = offsetAlongAxis,
+                .y = offsetAcrossAxis
+            });
         } else {
-            childY += prevProps.size.height + (i * props.style.childGap);
+            offsetAlongAxis += prevProps.size.height + props.style.childGap;
+            child->updatePosition({
+                .x = offsetAcrossAxis,
+                .y = offsetAlongAxis
+            });
         }
 
-        child->updatePosition({
-            .x = childX,
-            .y = childY
-        });
     }
 
     Serial.printf(
